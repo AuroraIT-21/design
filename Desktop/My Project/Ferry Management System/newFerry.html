@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking Syatem</title>
+    <link rel="stylesheet" href="newFerry.css">
+</head>
+
+<body>
+
+    <!-- javascript code starts -->
+
+    <script>
+
+        function show() {
+            var option = document.getElementById("option").value;
+
+            if (option == "Bus" || option == "Truck" || option == "Microbus" || option == "Motorcycle") {
+                document.getElementById("vInfo").style.display = "block";
+                document.getElementById("passInfo").style.display = "none";
+                document.getElementById("error").style.display = "none";
+
+
+            }
+            else if (option == "Passenger") {
+
+                document.getElementById("vInfo").style.display = "none";
+                document.getElementById("passInfo").style.display = "block";
+                document.getElementById("error").style.display = "none";
+            }
+
+            else {
+                document.getElementById("vInfo").style.display = "none";
+                document.getElementById("passInfo").style.display = "none";
+                document.getElementById("error").style.display = "inline";
+            }
+
+        }
+
+
+
+
+    function store() {
+
+
+            var option =document.getElementById("option").value;
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var seat = document.getElementById("seat").value;
+            var vName = document.getElementById("vName").value;
+            var vNumber =document. getElementById("vNumber").value;
+            var qun = document.getElementById("qun").value;
+            var date = document.getElementById("date").value;
+
+
+
+            if(qun>0)
+            {
+
+
+            var weight = 100000;
+            if (option == "Bus" || option == "Truck") {
+                weight -= (qun * 10000);
+                
+            }
+
+            else if (option == "Microbus") {
+                weight -= (qun * 5000);
+                
+            }
+
+            else if (option == "Motorcycle") {
+                weight -= (qun * 100);
+                
+            }
+
+            else{
+                weight -= (qun * 65);
+                
+
+            }
+
+
+            document.getElementById("Nobus").innerHTML = Math.floor(weight / 10000);
+            document.getElementById("Notruck").innerHTML = Math.floor(weight / 10000);
+            document.getElementById("Nomicro").innerHTML = Math.floor(weight / 5000);
+            document.getElementById("Nomotor").innerHTML = Math.floor(weight / 100);
+            document.getElementById("Nopass").innerHTML = Math.floor(weight / 65);
+
+
+        }
+
+        else{
+            var qun = document.getElementById("qun").style.display="block"
+            document.getElementById("Qerror").style.display="inline";
+        }
+    
+    }
+
+    // route start
+
+    function routeDisplay()
+    {
+        var routeOption = document.getElementById("routeOption").value;
+    
+    if(routeOption=="paturia"){
+    var ferryOption = document.getElementById("routeOption").value;
+
+        document.getElementById("A1").style.display="block";
+        document.getElementById("B1").style.display="block";
+        document.getElementById("C1").style.display="block";
+        document.getElementById("D1").style.display="none";
+        document.getElementById("E1").style.display="none";
+    }
+
+    else{
+        document.getElementById("A1").style.display="none";
+        document.getElementById("B1").style.display="none";
+        document.getElementById("C1").style.display="none";
+        document.getElementById("D1").style.display="block";
+        document.getElementById("E1").style.display="block";
+      }
+    }
+
+    // route end
+
+</script>
+
+     <!-- javascript code ends -->
+
+
+
+
+    <div class="container">
+        <h2 id="header">Ticket Booking</h2>
+        <form action="#">
+            <div class="rickrt-left">
+                <label id="ticket" for="types">Ticket For </label>
+                <select onchange="show()" id="option">
+                    <option value="null"> --Chose Option-- </option>
+                    <option value="Bus">Bus</option>
+                    <option value="Truck">Truck</option>
+                    <option value="Microbus">Microbus</option>
+                    <option value="Motorcycle">Motorcycle</option>
+                    <option value="Passenger">Passenger</option>
+                </select>
+                <span id="error" style="color: red; display: none;">Field must fill up</span>
+                <br><br>
+
+            </div>
+
+
+            <div class="ticket-right">
+                <label id="ticket" for="types">Route Name</label>
+                <select id="routeOption" onchange="routeDisplay()">
+                    <option value="null"> --Chose Option-- </option>
+                    <option value="paturia">Pturia to Aricha</option>
+                    <option value="aricha">Aricha to Doulotia</option>
+                </select>
+            </div>
+
+            <div class="ticket-last">
+                <label id="ticket" for="types">Ferry Name</label>
+                <select  id="ferryOption">
+
+                    <option value="null"> --Chose Option-- </option>
+                    <option value="A" id="A1">A (9.30)</option>
+                    <option value="B" id="B1">B (10.30)</option>
+                    <option value="C" id="C1">C (11.30)</option>
+                    <option value="D" id="D1">D (12.30)</option>
+                    <option value="E" id="E1">E (1.30)</option>
+
+                    
+                </select>
+            </div>
+
+            <div class="pass-info" id="passInfo">
+                <h3>Passenger-Info</h3>
+
+                <table>
+                    <tr>
+                        <td>
+                            <lebel for="name:" id="name">Name:
+                        </td>
+                        <td><input type="text" placeholder="Enter the Name"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <lebel for="name:" id="phone">Phone No:
+                        </td>
+                        <td><input type="number" placeholder="Enter the Phone No."></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <lebel for="name:" id="seat">Seat-No:
+                        </td>
+                        <td><input type="number" placeholder="Enter the Seat No."></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div style="display: none;" class="vehicle-info" id="vInfo">
+                <h3>Vehicle-Info</h3>
+
+                <table>
+                    <tr>
+                        <td>
+                            <lebel for="name:" id="vName">Vehicle-Name:
+                        </td>
+                        <td><input type="varchar" placeholder="Enter the Name"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <lebel for="name:" id="vNumber">Vehicle-Number:
+                        </td>
+                        <td><input type="varchar" placeholder="Enter the Number"></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="footer">
+                <h3>Quantity of Ticket</h3>
+                <input type="number" placeholder="Input the number" id="qun">
+                <span id="Qerror" style="color: red; display: none;">Quantity not less then 1</span>
+
+                <h3 id="date">Date</h3>
+                <input type="date">
+            </div>
+
+
+            <table>
+                <tr>
+                    <td>
+                        <button class="print-btn" id="myBtn" >Print</button>
+                    </td>
+                        
+                        <td>
+                        <button class="btn" onclick="store()">Submit</button>
+                    </td>
+                </tr>
+            </table>
+
+         <!-- The Modal start -->
+                <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+                </div>
+            
+            </div>
+        <!-- The Modal end -->
+        </form>
+        <div class="left-weight">
+            <h3>Available Space For Bus</h3>
+            <p id="Nobus"></p>
+
+            <h3>Available Space For Truck</h3>
+            <p id="Notruck"></p>
+
+            <h3>Available Space For Microbus</h3>
+            <p id="Nomicro"></p>
+
+            <h3>Available Space For Mototrcycle</h3>
+            <p id="Nomotor"></p>
+
+            <h3>Available Space For Passenger</h3>
+            <p id="Nopass"></p>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+    modal.style.display = "block";
+    
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    } 
+    </script>
+
+</body>
+
+</html>
